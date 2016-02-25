@@ -6,11 +6,12 @@ def log(*args)
 end
 
 module Masqueraide
-	module Engine
-		class Ebooks < Ebooks::Model
-			# Supress Ebook's puts statement. (Use only for debug)
-			def puts(p)
-			end
-		end
-	end
+  module Engine
+    # Ebooks class that inherits Models from Ebooks::Model
+    class Ebooks < Ebooks::Model
+      # Supress Ebook's puts statement. (Use only for debug)
+      def puts(p)
+      end
+    end
+  end
 end
