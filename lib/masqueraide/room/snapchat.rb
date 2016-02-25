@@ -169,21 +169,11 @@ module Masqueraide
 				return json_data
 			end
 
-			# Send a chat message.
-			def convo_info(message, username)
+			# Send a chat info.
+			def convo_info(username)
 				if @username.nil? == true and @username.nil? == true
 					creds_not_found
 				end
-
-				# Conversation post messages.
-				params = {
-					"username" => @username,
-					"auth_token" => @auth_token,
-					"endpoint" => "/loq/conversation_post_messages",
-				}
-
-				jwt = sign_token(params)
-				response = endpoint_auth(jwt)
 
 				# Get convo auth token.
 				msg_auth = conversation_auth(username)
@@ -191,6 +181,7 @@ module Masqueraide
 				mac = msg_auth['messaging_auth']['mac']
 				id = gen_chat_uuid
 				
+				# Prepare message (to and from)
 				message_data = [{
 					"presences" => [
 						@username => true,
@@ -239,16 +230,32 @@ module Masqueraide
 					"type" => "presence"
 				}
 
-				# Get timestamp.
+				# Get params for conversation post messages.
+				params = {
+					"username" => @username,
+					"auth_token" => @auth_token,
+					"endpoint" => "/loq/conversation_post_messages",
+				}
+
+				jwt = sign_token(params)
+				response = endpoint_auth(jwt)
+
+				# Prepare real post convo info.
 				ts = JSON.parse(response.body)["endpoints"][0]["params"]["timestamp"]
 				sc_data = {
-					"recipient_usernames" => @username,
+					"username" => @username,
 					"messages" => message_data.to_json,
-					"timestamp" => ts
+					"timestamp" => ts,
+					"features_map" => {},
 				}
 
 				json_data = post_sc_request(response, sc_data)
 				return json_data
+			end
+
+			# Send a chat message.
+			def chat(message, username)
+				info = convo_info(username)
 			end
 
 			# If you've already got an auth token,  
