@@ -68,11 +68,11 @@ module Masqueraide
     def assign_room(r)
       if r.class.to_s.byteslice(0, 17) == Masqueraide::Room.to_s
         @room = r
-        @room.ai(self)
+        @room.ai = self
         return @room
       elsif r.class.superclass.to_s.byteslice(0, 17) == Masqueraide::Room.to_s
         @room = r
-        @room.ai(self)
+        @room.ai = self
         return @room
       elsif Symbol.all_symbols.include? r.to_sym
         result = ROOMS.key?(r.to_sym)
@@ -80,7 +80,7 @@ module Masqueraide
           raise 'RoomNotFoundException: ' + 'Room not found for: ' + r.to_s
         else
           @room = ROOMS[r.to_sym]
-          @room.ai(self)
+          @room.ai = self
           return @room
         end
       end
