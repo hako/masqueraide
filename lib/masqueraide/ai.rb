@@ -24,7 +24,7 @@ module Masqueraide
       @ai_name = ai_name
       @engine = engine(engine)
       @username = username.downcase
-      @room = assign_room(room) unless room.nil?
+      @room = room(room) unless room.nil?
       yield(self) unless m.nil?
     end
 
@@ -38,7 +38,7 @@ module Masqueraide
       @engine.consume path
     end
 
-    # Loads an already creaetd dataset
+    # Loads an already created dataset.
     def load_dataset(path)
       if (File.exist? path) == false
         raise 'FileNotFoundError: The path "' + path + '" does not exist'
@@ -65,7 +65,7 @@ module Masqueraide
 
     # Must be a social media room or part of a room class.
     # Will refactor...
-    def assign_room(r)
+    def room=(r)
       if r.class.to_s.byteslice(0, 17) == Masqueraide::Room.to_s
         @room = r
         @room.ai(self)

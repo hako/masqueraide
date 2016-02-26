@@ -50,20 +50,25 @@ There are two ways to dance:
 A block.
 
 ```ruby
-require "masqueraide"
+require 'masqueraide'
 
-bot = Masqueraide::AI.new("Bot")
+# Create a new bot with a name.
+bot = Masqueraide::AI.new('Bot')
 
-# Configure bot dataset
+# Before your bot can generate responses, it needs a dataset to learn from.
 bot.learn_from_dataset path_to_dataset
+
+# You can assign your bot a room, by default the 'Twitter Room' is selected.
 bot.assign_room :twitter
 
-# Configure the bot.
+# An example Bot configuration.
+# This configures the bot's actions for the chosen room.
+# In this case, this is the configuration for the 'Twitter Room'
 bot.room.configure do |config|
-	config.consumer_key = ""
-	config.consumer_secret = "" 
-	config.access_token = ""
-	config.access_token_secret = ""
+  config.consumer_key = ''
+  config.consumer_secret = ''
+  config.access_token = ''
+  config.access_token_secret = ''
 end
 
 # Dance. (Starts the bot)
@@ -73,26 +78,30 @@ bot.dance
 A class.
 
 ```ruby
-#!/usr/bin/env ruby
+require 'masqueraide'
 
-require "masqueraide"
-
+# An example Bot class.
+# This configures your bot's actions in the 'Twitter Room'
 class BotClass < Masqueraide::Room::Twitter
-	def configure
-		self.consumer_key = ""
-		self.consumer_secret = "" 
-		self.access_token = ""
-		self.access_token_secret = ""
-	end
+  def configure
+    self.consumer_key = ''
+    self.consumer_secret = ''
+    self.access_token = ''
+    self.access_token_secret = ''
+  end
 
-	def on_startup
-		self.scheduler.every '1m' do
-			self.tweet(ai("twitter_handle").say(130))
-		end
-	end
+  def on_startup
+    scheduler.every '1m' do
+      tweet(ai('twitter_handle').say(130))
+    end
+  end
 end
 
-bot = Masqueraide::AI.new("Bot", Bot.new("twitter_handle"))
+# Create a new bot for the chosen room, in this case the 'Twitter Room'
+# Each room may require additional parameters. The bot is tied a twitter handle.
+bot = Masqueraide::AI.new('Bot', Bot.new('twitter_handle'))
+
+# Before your bot can generate responses, it needs a dataset to learn from.
 bot.learn_from_dataset path_to_dataset
 
 # Dance. (Starts the bot)
