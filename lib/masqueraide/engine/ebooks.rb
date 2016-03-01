@@ -12,6 +12,10 @@ module Masqueraide
       # Supress Ebook's puts statement. (Use only for debug)
       def puts(p)
       end
+
+      def dataset
+        self
+      end
     end
   end
 end

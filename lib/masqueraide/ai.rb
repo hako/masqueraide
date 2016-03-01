@@ -55,6 +55,11 @@ module Masqueraide
       @engine.make_statement(length)
     end
 
+    # Returns the dataset.
+    def dataset
+      @engine.dataset
+    end
+
     # Replies to the person.
     def reply(reply, length)
       if length.integer? == false
@@ -87,19 +92,30 @@ module Masqueraide
     end
 
     # Starts the AI. Let's Dance.
-    def start
-      puts ''"
-      .ad88ba.
-     .ad8888888a.
-    d8``988P``988b
-    9b,,d88,,,d8888
-   d888P~~9888888b'
-   d888   '88KHW8P
-   `dP'     9888P
+    def start(fancy = false, commentary = false)
+      if fancy == true
 
- "'' + 'M A S Q U E R ''' + 'A I'.white + ''" D E\n" + phrases + "\n"
-      puts ''
-      puts '----------------------------------------'
+        puts ''"
+        .ad88ba.
+       .ad8888888a.
+      d8``988P``988b
+      9b,,d88,,,d8888
+     d888P~~9888888b'
+     d888   '88KHW8P
+     `dP'     9888P
+
+   "'' + 'M A S Q U E R ''' + 'A I'.white + ''" D E\n" + phrases + "\n"
+        puts ''
+        puts '----------------------------------------'
+
+      else
+        sleep 1
+        puts 'M A S Q U E R A I D E'.bold
+        puts ''
+        puts 'Masqueraide has started.'
+
+      end
+
       # TODO: Might have a threading issue here...
       if (@room.respond_to? 'each') == true
         @room.each do |b|
@@ -107,18 +123,24 @@ module Masqueraide
           b.start
         end
       end
-      if @room.name == 'Twitter'
-        puts @ai_name + " (@#{username})".cyan.bold + ' enters the ' + @room.name.downcase + ' room...'
+
+      if commentary == true
+        if @room.name == 'Twitter'
+          puts @ai_name + " (@#{username})".cyan.bold + ' enters the ' + @room.name.downcase + ' room...'
       end
-      sleep 2
-      puts @ai_name + ' puts on a mask with id ' + @id + ' and gets ready...'
-      sleep 1
-      @room.prepare
-      puts @ai_name.white + ':'.white + ' Ready.'
-      sleep 0.5
-      puts 'Let the Masqueraide begin.'.bold
-      sleep 1
-      puts @ai_name.white + ' is now socialising in the ' + @room.name.downcase + ' room.'
+        sleep 2
+        puts @ai_name + ' puts on a mask with id ' + @id + ' and gets ready...'
+        sleep 1
+        @room.prepare
+        puts @ai_name.white + ':'.white + ' Ready.'
+        sleep 0.5
+        puts 'Let the Masqueraide begin.'.bold
+        sleep 1
+        puts @ai_name.white + ' is now socialising in the ' + @room.name.downcase + ' room.'
+      else
+        sleep 1
+        puts @ai_name.white + ' is now masquerading as a human in the ' + @room.name.downcase + ' room.'
+      end
       room.start
     end
 

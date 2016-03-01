@@ -4,7 +4,25 @@
 
 module Masqueraide
   module Engine
-    class NLP
+    class SNLP
+      def consume
+      end
+
+      def consume_all
+      end
+
+      def load
+      end
+
+      def make_statement
+      end
+
+      def reply(statement, length)
+      end
+
+      def dataset
+        self
+      end
     end
   end
 end
