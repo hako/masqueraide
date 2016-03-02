@@ -1,47 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'thor'
-require 'masqueraide'
-require 'twitter_ebooks'
-
-# Commands for the Twitter Room.
-module Commands
-  # Twitter Subcommand class.
-  class Twitter < Thor
-    desc 'archive [USERNAME, PATH]', "Consumes a Twitter user's tweets."
-    def archive(username, path)
-      if username.nil?
-        puts 'username is empty'
-        puts :desc
-        exit 1
-      end
-      puts 'Archiving @' + username + "'s tweets using twitter_ebooks..."
-      begin
-         Ebooks::Archive.new(username, path + '.json').sync
-       rescue Exception => e
-         puts 'Unable to archive @' + username + "'s tweets."
-         puts 'Please check that the path "' + path + '" exists.'
-         puts 'Reason: ' + e.to_s
-         exit 1
-       end
-      puts 'Successfully saved archived tweets as "' + path + '.json"'
-    end
-    desc 'consume [NAME]', "Consumes a Twitter user's tweets."
-    def consume(_username)
-    end
-end
-end
-
-# Main CLI module.
-module Masqueraide
-  # CLI class for main commands.
-  class CLI < Thor
-    desc 'load bot.rb', 'Load a bot into Masqueraide'
-    def load(_bot)
-    end
-    desc 'twitter [SUBCOMMAND]', 'Commands related to twitter'
-    subcommand 'twitter', Commands::Twitter
-  end
-end
+require 'masqueraide/cli'
 
 Masqueraide::CLI.start(ARGV)

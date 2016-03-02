@@ -16,6 +16,14 @@ module Masqueraide
       def dataset
         self
       end
+
+      def load(path)
+        model = self.class.superclass.load(path)
+        @tokens = model.tokens
+        @sentences = model.sentences
+        @mentions = model.mentions
+        @keywords = model.keywords
+      end
     end
   end
 end

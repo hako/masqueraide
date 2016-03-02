@@ -138,6 +138,7 @@ module Masqueraide
         sleep 1
         puts @ai_name.white + ' is now socialising in the ' + @room.name.downcase + ' room.'
       else
+        @room.prepare
         sleep 1
         puts @ai_name.white + ' is now masquerading as a human in the ' + @room.name.downcase + ' room.'
       end
