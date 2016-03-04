@@ -325,7 +325,7 @@ module Masqueraide
           params = casper_response['params']
           params.merge!(sc_params) unless sc_params.empty?
           sc_response = post(url, headers, params)
-          return {}.to_json if sc_response.body.length.empty?
+          return {}.to_json if sc_response.body.empty?
           sc_json_data = JSON.parse(sc_response.body)
         end
 
@@ -333,7 +333,7 @@ module Masqueraide
         # TODO: Better exceptions, return nil instead of rasiing exceptions.
         def casper_auth(url, params = {})
           fctx = Faraday.new(url: CASPER_ENDPOINT, ssl: { verify: @verify }) do |f|
-            f.response :logger unless @debug
+            f.response :logger if @debug == true
             f.proxy(@proxy) unless @proxy.nil?
             f.request :url_encoded
             f.adapter Faraday.default_adapter

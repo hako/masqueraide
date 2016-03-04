@@ -1,4 +1,5 @@
 require 'masqueraide'
+require 'masqueraide/server'
 require 'twitter_ebooks'
 require 'thor'
 
@@ -67,8 +68,13 @@ module Masqueraide
   "''
     end
     package_name 'Masqueraide'
-    desc 'load bot.rb', 'Load a bot into Masqueraide.'
+    desc 'load [BOT]', 'Load and run a bot into Masqueraide.'
     def load(_bot)
+      Kernel.load _bot
+    end
+    desc 'serve', 'Starts the builtin Masqueraide server.'
+    def serve()
+      Masqueraide::Server.run!
     end
     desc 'twitter [SUBCOMMAND]', 'Commands related to twitter'
     subcommand 'twitter', Commands::Twitter

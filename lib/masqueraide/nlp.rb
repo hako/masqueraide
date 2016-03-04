@@ -4,6 +4,7 @@ require 'twitter_ebooks'
 
 module Masqueraide
   module NLP
+    # Text tokenisation helper.
     def tokenize(text)
       tokens = Ebooks::NLP.tokenize(text)
       tokens
