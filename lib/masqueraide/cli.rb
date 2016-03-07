@@ -69,11 +69,11 @@ module Masqueraide
     end
     package_name 'Masqueraide'
     desc 'load [BOT]', 'Load and run a bot into Masqueraide.'
-    def load(_bot)
-      Kernel.load _bot
+    def load(bot)
+      Kernel.load bot
     end
     desc 'serve', 'Starts the builtin Masqueraide server.'
-    def serve()
+    def serve
       Masqueraide::Server.run!
     end
     desc 'twitter [SUBCOMMAND]', 'Commands related to twitter'

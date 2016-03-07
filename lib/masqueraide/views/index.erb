@@ -1,0 +1,153 @@
+<!doctype html>
+<!--
+  Masqueraide Material Design
+  
+  Masqueraide uses the Material Design Lite toolkit, 
+  By Google.
+  
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masqueraide</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- Masqueraide favicon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- Masqueraide CSS stylesheets -->
+    <link rel="stylesheet" href="/css/masqueraide.css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/indigo-purple.min.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  </head>
+  <body class="mas mdl-color--indigo-50 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+          <h3><span class="mi-mas_1"></span> Masqueraide</h3>
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+          <a href="#bots" class="mdl-layout__tab is-active">Bots</a>
+          <a href="#rooms" class="mdl-layout__tab">Rooms</a>
+          <a href="#status" class="mdl-layout__tab">Status</a>
+          <a href="#faq" class="mdl-layout__tab">FAQ</a>
+          <a href="#about" class="mdl-layout__tab">About</a>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+            <i class="material-icons" role="presentation">add</i>
+            <span class="visuallyhidden">Add</span>
+          </button>
+        </div>
+      </header>
+      <main class="mdl-layout__content"  style="flex: 1 0 auto;">
+        <div class="welcome mdl-color--indigo-50 mdl-layout__tab-panel is-active" id="bots">
+          <section class="section--center mdl-grid mdl-cell--5-col">
+          <div class="mas-card-wide mdl-card mdl-shadow--1dp">
+            <div class="mdl-card__title">
+              <h2 class="mdl-card__title-text">Welcome to Masqueraide!</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+              <h5>There are no bots running, Yet.</h5>
+              <small>Tip: Press mask or the 'Get Started' button to prepare a new bot.</small>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Get Started
+              </a>
+            </div>
+          </div>
+          </section>
+          <section class="mdl-layout-spacer mdl-grid">
+          </section>
+        </div>
+        <div class="norooms mdl-color--indigo-50 mdl-layout__tab-panel" id="rooms">
+          <section class="section--center mdl-grid mdl-cell--5-col">
+          <div class="mas-card-wide mdl-card mdl-shadow--1dp">
+            <div class="mdl-card__supporting-text">
+              <h5>No Rooms at the moment.</h5>
+              <small>Rooms are only available once a bot has started running.</small>
+            </div>
+          </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel mdl-color--indigo-50" id="faq">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h2>FAQ</h2>
+            </div>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel mdl-color--indigo-50" id="about">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h2>About</h2>
+            <section class="mdl-layout-spacer mdl-grid">
+            </section>
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel mdl-color--indigo-50" id="status">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h2>Status</h2>
+            <section class="mdl-layout-spacer mdl-grid">
+            </section>
+          </section>
+        </div>
+      <div class="mdl-layout-spacer"></div>
+        <footer class="mdl-mega-footer">        
+          <section class="mdl-layout-spacer mdl-grid">
+          </section>
+          <div class="mdl-mega-footer--bottom-section">
+            <div class="mdl-logo">
+            <span class="mi-mas_1">
+              Masqueraide
+            </div>
+            <ul class="mdl-mega-footer--link-list">
+              <li><a href="https://github.com/hako/masqueraide">Github</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+    <script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/material.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/masqueraide.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>

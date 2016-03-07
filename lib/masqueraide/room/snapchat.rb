@@ -431,7 +431,7 @@ module Masqueraide
         end
 
         # Send GET to a URL.
-        # TODO: Better exceptions, return nil instead of rasiing exceptions.
+        # TODO: Better exceptions, return nil instead of rasing exceptions.
         def get(url, headers, params = {})
           fctx = Faraday.new(url: SC_URL, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
@@ -490,7 +490,9 @@ module Masqueraide
         def gen_chat_uuid
           sr = SecureRandom.uuid
           md5 = OpenSSL::Digest::MD5.new(sr).to_s
-          uuid = ('%08s-%04s-%04x-%04x-%12s'.format [md5[0..7], md5[8..11], md5[12..15].to_i(10), md5[16..19].to_i(10), md5[20..32]]).upcase
+          uuid = format('%08s-%04s-%04x-%04x-%12s',
+                        md5[0..7], md5[8..11], md5[12..15].to_i(10),
+                        md5[16..19].to_i(10), md5[20..32]).upcase
           uuid
         end
 

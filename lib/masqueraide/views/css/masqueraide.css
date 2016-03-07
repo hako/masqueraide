@@ -1,0 +1,306 @@
+/*
+* Masqueraide main stylesheet. 
+*/
+
+/*
+* Copyright 2015 Google Inc. All Rights Reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.mas .mdl-layout__header-row {
+  padding-left: 40px;
+}
+.mas .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
+  font-size: inherit;
+}
+.mas .mdl-layout__tab-bar-button {
+  display: none;
+}
+.mas .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
+  display: none;
+}
+.mas .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar,
+.mas .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
+  overflow: visible;
+}
+.mas .mdl-layout__tab-bar-container {
+  height: 64px;
+}
+.mas .mdl-layout__tab-bar {
+  padding: 0;
+  padding-left: 16px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+.mas .mdl-layout__tab-bar .mdl-layout__tab {
+  height: 64px;
+  line-height: 64px;
+}
+.mas .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+  background-color: white;
+  height: 4px;
+}
+.mas main > .mdl-layout__tab-panel {
+  padding: 8px;
+  padding-top: 48px;
+}
+.mas .mdl-card {
+  height: auto;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.mas .mdl-card > * {
+  height: auto;
+}
+.mas .mdl-card .mdl-card__supporting-text {
+  margin: 40px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 0;
+  color: inherit;
+  width: calc(100% - 80px);
+}
+.mas.mas .mdl-card__supporting-text h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.mas .mdl-card__actions {
+  margin: 0;
+  padding: 4px 40px;
+  color: inherit;
+}
+.mas .mdl-card__actions a {
+  color: #00BCD4;
+  margin: 0;
+}
+.mas .mdl-card__actions a:hover,
+.mas .mdl-card__actions a:active {
+  color: inherit;
+  background-color: transparent;
+}
+.mas .mdl-card__supporting-text + .mdl-card__actions {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.mas #add {
+  position: absolute;
+  right: 40px;
+  top: 36px;
+  z-index: 999;
+}
+
+.mas .mdl-layout__content section:not(:last-of-type) {
+  position: relative;
+  margin-bottom: 48px;
+}
+.mas section.section--center {
+  max-width: 860px;
+}
+.mas #features section.section--center {
+  max-width: 620px;
+}
+.mas section > header{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.mas section > .section__play-btn {
+  min-height: 200px;
+}
+.mas section > header > .material-icons {
+  font-size: 3rem;
+}
+.mas section > button {
+  position: absolute;
+  z-index: 99;
+  top: 8px;
+  right: 8px;
+}
+.mas section .section__circle {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
+}
+.mas section .section__text {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  padding-top: 8px;
+}
+.mas section .section__text h5 {
+  font-size: inherit;
+  margin: 0;
+  margin-bottom: 0.5em;
+}
+.mas section .section__text a {
+  text-decoration: none;
+}
+.mas section .section__circle-container > .section__circle-container__circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  margin: 8px 0;
+}
+.mas section.section--footer .section__circle--big {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin: 8px 32px;
+}
+.mas .is-small-screen section.section--footer .section__circle--big {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 8px 16px;
+}
+.mas section.section--footer {
+  padding: 64px 0;
+  margin: 0 -8px -8px -8px;
+}
+.mas section.section--center .section__text:not(:last-child) {
+  border-bottom: 1px solid rgba(0,0,0,.13);
+}
+.mas .mdl-card .mdl-card__supporting-text > h3:first-child {
+  margin-bottom: 24px;
+}
+.mas .mdl-layout__tab-panel:not(#bots) {
+  background-color: white;
+}
+.mas .mdl-layout__tab-panel:not(#rooms) {
+  background-color: white;
+}
+.mas #features section {
+  margin-bottom: 72px;
+}
+.mas #features h4, #features h5 {
+  margin-bottom: 16px;
+}
+.mas .toc {
+  border-left: 4px solid #C1EEF4;
+  margin: 24px;
+  padding: 0;
+  padding-left: 8px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.mas .toc h4 {
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+.mas .toc a {
+  color: #4DD0E1;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 28px;
+  display: block;
+}
+.mas .mdl-menu__container {
+  z-index: 99;
+}
+
+
+/*
+* Masqueraide additional stylesheets
+*/
+
+.mas-card-wide.mdl-card {
+    width: 512px;
+}
+.mas-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: linear-gradient(to bottom, rgba(4, 46, 202, 0.93) 0%, rgba(156, 104, 251, 0.74) 100%), url(/img/mas_bg.jpg) center / cover;
+}
+.mas-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+/*
+* Masqueraide webfont icons.
+*/
+
+@font-face {
+    font-family: 'masquerade_icons';
+    src:
+        url('../fonts/masquerade_icons.ttf?uxbjvm') format('truetype'),
+        url('../fonts/masquerade_icons.woff?uxbjvm') format('woff'),
+        url('../fonts/masquerade_icons.svg?uxbjvm#masquerade_icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="mi-"], [class*=" mi-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'masquerade_icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.mi-mas_4:before {
+    content: "\1f453";
+}
+.mi-mas_3:before {
+    content: "\1f576";
+}
+.mi-mas_2:before {
+    content: "\1f479";
+}
+.mi-mas_1:before {
+    content: "\1f47a";
+}
