@@ -1,5 +1,6 @@
 require 'bundler/gem_tasks'
 
-RSpec::Core::RakeTask.new
-
-task :default => :spec
+task :default => [:spec]
+task :spec do
+ sh 'rspec spec'
+end
