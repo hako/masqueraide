@@ -11,3 +11,7 @@ gem 'faraday'
 gem 'jwt'
 gem 'twitter_ebooks', '~>3.1.6'
 gem 'sinatra'
+
+group :test do
+  gem 'rake'
+end

@@ -17,6 +17,8 @@
   <br><br>
 </h3>
 
+# Masqueraide [![Build Status](https://travis-ci.com/hako/masqueraide.svg?token=bJfam1KHVz8SidpzxUbF&branch=master)](https://travis-ci.com/hako/masqueraide)
+
 Masqueraide is an AI/Bot library that is designed to run on social networks. Masqueraide works by having two concepts called **'Rooms'** and **'Engines'**. Social networks are 'Rooms', and the underlying NLP algorithms are the 'Engines'.
 
 In the near future, Masqueraide will have plugin support, more NLP engines and more social networks.
