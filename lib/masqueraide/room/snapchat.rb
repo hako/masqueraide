@@ -109,7 +109,7 @@ module Masqueraide
           json_data
         end
 
-        # Snapchat conversations.
+        # An array of Snapchat conversations.
         def conversations
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -123,7 +123,24 @@ module Masqueraide
           json_data
         end
 
-        # A Snapchat conversation,
+        # Conversation authentication with two people.
+        def conversation_auth(to)
+          creds_not_found if @username.nil? == true && @username.nil? == true
+          params = {
+            'username' => @username,
+            'auth_token' => @auth_token,
+            'endpoint' => '/loq/conversation_auth_token'
+          }
+          jwt = sign_token(params)
+          response = endpoint_auth(jwt)
+          sc_data = {
+            'conversation_id' => [@username].push(to).sort.join("~")
+          }
+          json_data = post_sc_request(response, sc_data)
+          json_data
+        end
+
+        # A single Snapchat conversation.
         def conversation(username)
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -157,8 +174,6 @@ module Masqueraide
           json_data
         end
 
-        
-
         # Send a chat message.
         def chat(_message, username)
           info = convo_info(username)
@@ -185,23 +200,6 @@ module Masqueraide
         private
 
         # The Low Level private API methods for the Snapchat API & Casper API.
-
-        # Conversation authentication with two people.
-        def conversation_auth(to)
-          creds_not_found if @username.nil? == true && @username.nil? == true
-          params = {
-            'username' => @username,
-            'auth_token' => @auth_token,
-            'endpoint' => '/loq/conversation_auth_token'
-          }
-          jwt = sign_token(params)
-          response = endpoint_auth(jwt)
-          sc_data = {
-            'conversation_id' => [@username].push(to).join('~')
-          }
-          json_data = post_sc_request(response, sc_data)
-          json_data
-        end
 
         # Casper Endpoint authentication.
         def endpoint_auth(jwt)
@@ -338,6 +336,13 @@ module Masqueraide
                 puts res.body
                 raise 'Error: 404 Not Found'
               end
+            when 503
+              if res.headers['content-type'] == 'application/json'
+                raise 'ServiceError: ' + JSON.parse(res.body)['message']
+              else
+                puts res.body
+                raise 'Error: Token Service is Unavailable'
+              end
             when 429
               if res.headers['content-type'] == 'application/json'
                 raise 'RateLimitReachedException: ' + JSON.parse(res.body)['message']
@@ -394,6 +399,13 @@ module Masqueraide
                 puts res.body
                 raise 'Error: 404 Not Found'
               end
+            when 503
+              if res.headers['content-type'] == 'application/json'
+                raise 'ServiceError: ' + JSON.parse(res.body)['message']
+              else
+                puts res.body
+                raise 'Error: Token Service is Unavailable'
+              end
             when 429
               if res.headers['content-type'] == 'application/json'
                 raise 'RateLimitReachedException: ' + JSON.parse(res.body)['message']
@@ -408,12 +420,7 @@ module Masqueraide
 
         # Generate a chat UUID.
         def gen_chat_uuid
-          sr = SecureRandom.uuid
-          md5 = OpenSSL::Digest::MD5.new(sr).to_s
-          uuid = format('%08s-%04s-%04x-%04x-%12s',
-                        md5[0..7], md5[8..11], md5[12..15].to_i(10),
-                        md5[16..19].to_i(10), md5[20..32]).upcase
-          uuid
+          SecureRandom.uuid
         end
 
         # Credentials not found method.

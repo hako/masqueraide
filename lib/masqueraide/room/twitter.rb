@@ -42,7 +42,7 @@ module Masqueraide
       # A block that configures the current AI in the room.
       def configure(&c)
         self.user = @ai.username
-        self.delay_range = 1..6
+        self.delay_range = 1..12
         yield(self) unless c.nil?
       end
 

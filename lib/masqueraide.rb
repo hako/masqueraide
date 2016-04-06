@@ -1,5 +1,6 @@
 require 'masqueraide/version'
 require 'masqueraide/ai'
+require 'masqueraide/engine/engine'
 require 'masqueraide/engine/ebooks'
 require 'masqueraide/engine/snlp'
 require 'masqueraide/room/twitter'

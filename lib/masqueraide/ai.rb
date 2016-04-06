@@ -156,11 +156,7 @@ module Masqueraide
         return ENGINES[engine]
       end
     end
-
-    # Parses a customised dataset.
-    def parse_custom_dataset
-    end
-
+    
     # Random phrases.
     def phrases
       quote = ['  Let the dance begin.', '     Human or AI?', "     Let's dance."]
