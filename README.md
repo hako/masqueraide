@@ -19,7 +19,7 @@
 
 # Masqueraide [![Build Status](https://travis-ci.com/hako/masqueraide.svg?token=bJfam1KHVz8SidpzxUbF&branch=master)](https://travis-ci.com/hako/masqueraide)
 
-Masqueraide is an AI/Bot library that is designed to run on social networks. Masqueraide works by having two concepts called **'Rooms'** and **'Engines'**. Social networks are 'Rooms', and the underlying NLP algorithms are the 'Engines'.
+Masqueraide is an AI/Bot library that is designed to run on social networks. Masqueraide works by having two concepts called **'Rooms'** and **'Engines'**. Social networks are 'Rooms', and the underlying NLP (Natrual Language Processing) algorithms are the 'Engines'.
 
 In the near future, Masqueraide will have plugin support, more NLP engines and more social networks.
 
@@ -27,7 +27,32 @@ This library was part of a group project to make as if the AI/Bot is able to pas
 
 By default, Masqueraide utilises & builds on top of the excellent [twitter_ebooks](https://github.com/mispy/twitter_ebooks) framework by [@mispy](http://github.com/mispy).
 
+
+## Requirements
+
++ ruby
++ bundler
++ aspell (This might change in the future.)
+
 ## Installation
+
+If you're on Linux, first get masqueraide's depedencies:
+
+```sh
+[sudo] apt-get update -qq
+[sudo] apt-get install -qq aspell libaspell-dev aspell-en aspell-el aspell-nl
+# Assuming that ruby is installed
+[sudo] gem install bundler
+```
+
+Then, if you have bundler installed, run:
+`git clone https://github.com/hako/masqueraide`
+
+And then execute:
+
+    $ bundle
+	
+Or
 
 Add this line to your application's Gemfile:
 
@@ -119,6 +144,10 @@ Masqueraide supports the current social networks below:
 + **Your own????**
 
 You can create your own 'room' by creating a class under `Masqueraide::Room` and assigning your AI to that room.
+
+## NLP
+
+NLP related helper functions are available under `Masqueraide::NLP`
 
 ## Development
 
