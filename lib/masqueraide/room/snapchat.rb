@@ -122,6 +122,20 @@ module Masqueraide
           json_data = post_sc_request(response)
           json_data
         end
+        
+        # Network Ping request
+        def network_ping_request
+          headers = {
+            "Host" => "app.snapchat.com",
+            "Accept-Locale" => "en_GB",
+            "Accept" => "*/*",
+            "User-Agent" => "Snapchat/9.27.5.0 (iPhone5,2; iOS 9.0.2)",
+            "Accept-Language" => "en-gb",
+            "Connection" => "keep-alive",
+          }
+          json_data = get("/bq/ping_network", headers)
+          json_data
+        end
 
         # Conversation authentication with two people.
         def conversation_auth(to)

@@ -94,6 +94,27 @@ module Masqueraide
       tokens = Ebooks::NLP.tokenize(text)
       tokens
     end
+    
+    # TODO: Fix this:
+    # Deliberately produces a mistake in a sentence.
+    def self.produce_mistake text
+      tokens = tokenize text
+      tokens_index = Random.new.rand 0..tokens.length - 1
+      correct_word = tokens[tokens_index]
+      
+      selected_word_index = Random.new.rand 0..correct_word.length - 1
+      misspelled_char = correct_word[selected_word_index].succ
+      misspelled_word = correct_word
+      misspelled_word[selected_word_index] = misspelled_char
+      
+      tokens[tokens_index] = misspelled_word
+      
+      correct = tokenize text
+      true_word = correct[tokens_index]
+
+      result = {"text"=>tokens.join(' '), "correction"=>true_word, "mistakes"=>true, "mistake"=>misspelled_word}
+      return result
+    end
 
     # TODO, csv dataset parsing...
     def self.csv2model(input)

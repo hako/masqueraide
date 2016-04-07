@@ -59,7 +59,7 @@ module Masqueraide
     def dataset
       @engine.dataset
     end
-
+    
     # Replies to the person.
     def reply(reply, length)
       if length.integer? == false
