@@ -128,6 +128,26 @@ module Masqueraide
           json_data = post_sc_request(response)
           json_data
         end
+        
+        # TODO: Upload a snap to a user.
+        def send_snap(recipients, time=5.0)
+          creds_not_found if @username.nil? == true && @username.nil? == true
+          params = {
+            'username' => @username,
+            'auth_token' => @auth_token,
+            'endpoint' => '/bq/send'
+          }
+          jwt = sign_token(params)
+          response = endpoint_auth(jwt)
+          sc_data = {
+            'time' => time,
+            'media_id' => (sprintf "%s~%s", username, SecureRandom.uuid).upcase,
+            'recipients' => recipients,
+            'zipped' => 0,
+          }
+          json_data = post_sc_request(response, sc_data)
+          json_data
+        end
 
         # An array of Snapchat conversations.
         def conversations
@@ -208,9 +228,9 @@ module Masqueraide
           json_data
         end
 
-        # Send a chat message.
-        def chat(_message, username)
-          info = convo_info(username)
+        # TODO: Send a chat message.
+        def chat(_message, _username)
+          return "Oh no! You're trying to call a function that is not implemented! Please use the official Snapchat app to chat instead. :P"
         end
 
         # If you've already got an auth token,
@@ -222,10 +242,6 @@ module Masqueraide
 
         # Login into Snapchat using Casper and fetch the url.
         def login(username, password)
-          data = {
-            'username' => username,
-            'password' => password
-          }
           response = casper_login(username, password)
           json_data = post_sc_login_request(response)
           set_auth_token(username, json_data['updates_response']['auth_token'])
@@ -266,7 +282,7 @@ module Masqueraide
           headers = cr['headers']
           params = cr['params']
           sc_response = post(url.path, headers, params)
-          sc_json_data = JSON.parse(sc_response.body)
+          JSON.parse(sc_response.body)
         end
 
         # Forward Casper endpoint request to Snapchat. (Casper -> Snapchat)
@@ -278,7 +294,7 @@ module Masqueraide
           params.merge!(sc_params) unless sc_params.empty?
           sc_response = post(url, headers, params, multipart)
           return {}.to_json if sc_response.body.empty?
-          sc_json_data = JSON.parse(sc_response.body)
+          JSON.parse(sc_response.body)
         end
 
         # Authenticate the generated JWT token with the Casper API.

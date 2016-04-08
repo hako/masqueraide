@@ -46,6 +46,7 @@ If you're on Linux, first get masqueraide's depedencies:
 ```
 
 Then, if you have bundler installed, run:
+
 `git clone https://github.com/hako/masqueraide`
 
 And then execute:
@@ -142,6 +143,12 @@ Masqueraide supports the current social networks below:
 + **Twitter** (By using twitter_ebooks)
 + **Snapchat**
 + **Your own????**
+
+Some social networks that _might_ be supported in the future depending on userbase.
+
++ **Facebook Messenger**
++ **Kik**
++ **Instagram**
 
 You can create your own 'room' by creating a class under `Masqueraide::Room` and assigning your AI to that room.
 
