@@ -94,6 +94,26 @@ module Masqueraide
           json_data = post_sc_request(response)
           json_data
         end
+        
+        # Conversation authentication with two people.
+        def upload_profile_pic(path)
+          creds_not_found if @username.nil? == true && @username.nil? == true
+          raise "InvalidFileFormatException" if (File.extname(path) != ".jpg") && (File.extname(path) != ".jpeg")
+          raise Errno::ENOENT if File.exist?(path) == false
+          data = Faraday::UploadIO.new(path, 'image/jpg')
+          params = {
+            'username' => @username,
+            'auth_token' => @auth_token,
+            'endpoint' => '/bq/upload_profile_data'
+          }
+          jwt = sign_token(params)
+          response = endpoint_auth(jwt)
+          sc_data = {
+            'data' => data
+          }
+          json_data = post_sc_request(response, sc_data, true)
+          json_data
+        end
 
         # Snapchat stories.
         def stories
@@ -250,13 +270,13 @@ module Masqueraide
         end
 
         # Forward Casper endpoint request to Snapchat. (Casper -> Snapchat)
-        def post_sc_request(cr, sc_params = {})
+        def post_sc_request(cr, sc_params = {}, multipart=false)
           casper_response = JSON.parse(cr.body)['endpoints'][0]
           url = casper_response['endpoint']
           headers = casper_response['headers']
           params = casper_response['params']
           params.merge!(sc_params) unless sc_params.empty?
-          sc_response = post(url, headers, params)
+          sc_response = post(url, headers, params, multipart)
           return {}.to_json if sc_response.body.empty?
           sc_json_data = JSON.parse(sc_response.body)
         end
@@ -307,26 +327,50 @@ module Masqueraide
 
         # Send POST data to a URL.
         # TODO: Better exceptions, return nil instead of rasiing exceptions.
-        def post(url, headers, params = {})
+        def post(url, headers, params = {}, multipart=false)
           fctx = Faraday.new(url: SC_URL, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
             f.proxy(@proxy) if @proxy.nil? == false
-            f.request :url_encoded
+            if multipart == true
+              f.request :multipart
+            else
+              f.request :url_encoded
+            end
             f.adapter Faraday.default_adapter
           end
-          res = fctx.post do |req|
-            req.url url
-            req.headers = headers
-            req.body = params
-
-            if @debug == true
-              puts ''
-              puts 'REQUEST'
-              puts ''
-              puts req.body
-              puts ''
+          
+        res = ""
+        if multipart == true
+            res = fctx.post do |req|
+              req.url url
+              req.headers = headers
+              req.options.boundary = "Boundary+0xAbCdEfGbOuNdArY"
+              req.headers['Content-Type'] = 'multipart/form-data'
+              req.body = params
+              if @debug == true
+                puts ''
+                puts 'REQUEST'
+                puts ''
+                puts req.body
+                puts ''
+              end
             end
-          end
+          else
+            res = fctx.post do |req|
+              req.url url
+              req.headers = headers
+              req.body = params
+
+              if @debug == true
+                puts ''
+                puts 'REQUEST'
+                puts ''
+                puts req.body
+                puts ''
+              end
+            end
+        end
+          
           if @debug == true
             puts ''
             puts 'RESPONSE'
@@ -334,6 +378,7 @@ module Masqueraide
             puts res.body
             puts ''
           end
+          
           if res.status != 200
             case res.status
             when 400
@@ -371,11 +416,10 @@ module Masqueraide
 
         # Send GET to a URL.
         # TODO: Better exceptions, return nil instead of rasing exceptions.
-        def get(url, headers, params = {})
+        def get(url, headers, params = {}, multipart=false)
           fctx = Faraday.new(url: SC_URL, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
             f.proxy(@proxy) if @proxy.nil? == false
-            f.request :url_encoded
             f.adapter Faraday.default_adapter
           end
           res = fctx.get do |req|
