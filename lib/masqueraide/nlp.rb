@@ -117,7 +117,7 @@ module Masqueraide
     end
 
     # TODO, csv dataset parsing...
-    def self.csv2model(input)
+    def self.csv2model(_input)
     end
       
     # An typing delay algorithm based on the length of the sentance and the words per minute typed.

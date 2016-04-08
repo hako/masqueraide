@@ -416,7 +416,7 @@ module Masqueraide
 
         # Send GET to a URL.
         # TODO: Better exceptions, return nil instead of rasing exceptions.
-        def get(url, headers, params = {}, multipart=false)
+        def get(url, headers, params = {}, _multipart=false)
           fctx = Faraday.new(url: SC_URL, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
             f.proxy(@proxy) if @proxy.nil? == false
