@@ -9,7 +9,7 @@ require 'masqueraide/nlp'
 
 module Masqueraide
   ENGINES = {
-    twitter_ebooks: Masqueraide::Engine::Ebooks.new,
+    ebooks: Masqueraide::Engine::Ebooks.new,
     snlp: Masqueraide::Engine::SNLP.new
   }.freeze
   ROOMS = {

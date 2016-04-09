@@ -20,6 +20,12 @@ describe 'Masqueraide NLP' do
       expect(delay).to eq 1.0
     end
     
+    it 'estimates typing delay correctly with different characters' do
+      text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      delay = Masqueraide::NLP.typing_delay(text)
+      expect(delay).to eq 3.726906294819124
+    end
+    
     it 'deliberately produces a mistake from a sentence' do
       text = "the quick brown fox jumps over the lazy dog."
       result = Masqueraide::NLP.produce_mistake(text)

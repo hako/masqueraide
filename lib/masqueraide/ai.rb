@@ -4,6 +4,7 @@
 
 require 'openssl'
 require 'digest'
+require 'pry'
 require 'colorize'
 
 module Masqueraide
@@ -13,7 +14,7 @@ module Masqueraide
     def initialize(ai_name = nil, room = nil, username = nil, engine = nil, &m)
       @id = 'MAS' << '_' << mid.upcase
       ai_name ||= @id
-      engine ||=  :twitter_ebooks
+      engine ||=  :ebooks
 
       if username.nil? == true && room.nil? == false
         username = room.username.downcase
@@ -36,6 +37,15 @@ module Masqueraide
       end
       return @engine.consume_all path if (path.respond_to? 'each') == true
       @engine.consume path
+    end
+    
+    # Is our AI assigned a room?
+    def assigned?
+      if @room.nil?
+        return false
+      else
+        return true
+      end
     end
 
     # Loads an already created dataset.
@@ -85,6 +95,11 @@ module Masqueraide
           raise 'RoomNotFoundException: ' + 'Room not found for: ' + r.to_s
         else
           @room = ROOMS[r.to_sym]
+          # Only applies to a special case like twitter.
+          if @room == Masqueraide::Room::Twitter
+            @room = @room.new(@username)
+            @room.user = @username
+          end
           @room.ai = self
           return @room
         end

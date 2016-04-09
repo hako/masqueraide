@@ -18,11 +18,7 @@ module Masqueraide
       end
 
       def load(path)
-        model = self.class.superclass.load(path)
-        @tokens = model.tokens
-        @sentences = model.sentences
-        @mentions = model.mentions
-        @keywords = model.keywords
+        @model = self.class.superclass.load(path)
       end
     end
   end
