@@ -1,5 +1,4 @@
 require 'masqueraide'
-require 'pry'
 
 describe 'Masqueraide AI' do
   describe 'AI attributes' do

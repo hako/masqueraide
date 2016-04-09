@@ -1,10 +1,9 @@
 # This describes a Masqueraide AI.
 # It must be able to consume, have an NLP engine, say things, respond to people.
-# And be assigned to rooms so they can socialise with people or even AI's.
+# And be assigned to rooms so they can socialise with people or even other AI's.
 
 require 'openssl'
 require 'digest'
-require 'pry'
 require 'colorize'
 
 module Masqueraide
@@ -98,7 +97,6 @@ module Masqueraide
           # Only applies to a special case like twitter.
           if @room == Masqueraide::Room::Twitter
             @room = @room.new(@username)
-            @room.user = @username
           end
           @room.ai = self
           return @room
@@ -157,7 +155,7 @@ module Masqueraide
         sleep 1
         puts @ai_name.white + ' is now masquerading as a human in the ' + @room.name.downcase + ' room.'
       end
-      room.start
+      @room.start
     end
 
     private

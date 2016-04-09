@@ -10,10 +10,22 @@ module Masqueraide
     class Twitter < Ebooks::Bot
       NAME = 'Twitter'.freeze
       @@ais_in_room = []
+      @logging = false
 
       # Name of the room.
       def name
         NAME
+      end
+      
+      def logging=(bool)
+        @logging = bool
+      end
+      
+      # Enables or disables logging.
+      def log(*args)
+        if @logging == true
+          super *args
+        end
       end
 
       # Fetch an AI by it's name in the room.
@@ -41,11 +53,7 @@ module Masqueraide
 
       # A block that configures the current AI in the room.
       def configure(&c)
-        if @ai.nil?
-          self.user = ""
-        else
-          self.user = @ai.username
-        end
+        self.user = nil
         self.delay_range = 1..12
         yield(self) unless c.nil?
       end
