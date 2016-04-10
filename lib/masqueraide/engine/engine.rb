@@ -26,7 +26,8 @@ module Masqueraide
     	# Say whatever up to a given length.
     	def reply(statement, length)
     	end
-
+      
+      # Returns the current dataset.
     	def dataset
     		self
     	end

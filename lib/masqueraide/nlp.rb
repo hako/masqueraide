@@ -120,7 +120,7 @@ module Masqueraide
     def self.csv2model(_input)
     end
       
-    # An typing delay algorithm based on the length of the sentance and the words per minute typed.
+    # An typing delay algorithm based on the length of the sentence and the words per minute typed.
     # The rate at which the bot types at can be changed.
     def self.typing_delay(words, wpm=23)
       w = 0

@@ -1,6 +1,6 @@
 # The Standard NLP engine for Masqueraide.
 
-# SNLP is also a basic example of a custom NLP engine.
+# SNLP is a basic example of a custom NLP engine.
 
 module Masqueraide
   module Engine
@@ -24,7 +24,8 @@ module Masqueraide
       # Say whatever up to a given length.
       def reply(statement, length)
       end
-
+      
+      # Returns the current dataset.
       def dataset
         self
       end

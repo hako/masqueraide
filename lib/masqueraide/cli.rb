@@ -18,7 +18,7 @@ module Commands
       puts 'Archiving @' + username + "'s tweets using twitter_ebooks..."
       begin
          Ebooks::Archive.new(username, path + '.json').sync
-       rescue Exception => e
+       rescue StandardError => e
          puts 'Unable to archive @' + username + "'s tweets."
          puts 'Please check that the path "' + path + '" exists.'
          puts 'Reason: ' + e.to_s
@@ -32,13 +32,13 @@ module Commands
         puts 'path does not exist.'
         puts :desc
         exit 1
-       end
+      end
       puts 'Consuming ' + path + "'s tweets using twitter_ebooks..."
       begin
          path_name = File.basename(path)
          model_name = path_name.split('.')[0..-2].join('.')
          Ebooks::Model.consume(path).save(model_name + '.model')
-       rescue Exception => e
+       rescue StandardError => e
          puts 'Unable to consume data from path ' + path
          puts 'Please check that the path "' + path + '" exists.'
          puts 'Reason: ' + e.to_s
@@ -46,7 +46,7 @@ module Commands
        end
       puts 'Successfully consumed tweets as "' + model_name + '.model' + '"'
     end
-end
+  end
 end
 
 # Main CLI module.
@@ -54,7 +54,7 @@ module Masqueraide
   # CLI class for main commands.
   class CLI < Thor
     if ARGV.empty?
-      puts ''"
+      puts "
        .ad88ba.
       .ad8888888a.
      d8``988P``988b
@@ -65,7 +65,7 @@ module Masqueraide
 
 - M A S Q U E R A I D E -
          #{Masqueraide::VERSION}
-  "''
+  "
     end
     package_name 'Masqueraide'
     desc 'load [BOT]', 'Load and run a bot into Masqueraide.'
@@ -76,7 +76,7 @@ module Masqueraide
     def serve
       Masqueraide::Server.run!
     end
-    desc 'twitter [SUBCOMMAND]', 'Commands related to twitter'
+    desc 'twitter [SUBCOMMAND]', 'Commands related to twitter.'
     subcommand 'twitter', Commands::Twitter
   end
 end

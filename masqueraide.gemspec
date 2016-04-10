@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['wesley@hakobaito.co.uk']
   spec.summary       = 'Masqueraide is an AI/Bot library designed to run on social networks.'
   spec.description   = 'Masqueraide is an AI/Bot library designed to run on social networks.'
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/hako/masqueraide'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or

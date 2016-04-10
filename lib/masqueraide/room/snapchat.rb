@@ -1,5 +1,8 @@
 # The Snapchat Room for Masqueraide AI bots.
 
+# This Room provides functions for interacting with users on Snapchat.
+# While you can send stories, pictures and get conversations, Chat functionality is currently not implemented.
+
 require 'faraday'
 require 'uri'
 require 'jwt'
@@ -25,17 +28,18 @@ module Masqueraide
 
       # Fetch an AI from the room.
       def ai(name)
-        ai = @@ais_in_room.select { |ai| ai.username == name }
+        ai = @@ais_in_room.select { |a| a.username == name }
         ai[0]
       end
+      
       # The Snapchat API, brought to you by @liamcottle of Casper.
-
       class API
         CASPER_ENDPOINT = 'https://casper-api.herokuapp.com'.freeze
         SC_URL = 'https://app.snapchat.com'.freeze
 
         attr_accessor :debug, :auth_token, :username
-
+        
+        # Main initialisation of Snapchat room.
         def initialize(api_key, api_secret, debug = false, proxy = nil)
           @api_key = api_key
           @api_secret = api_secret
@@ -53,7 +57,7 @@ module Masqueraide
           end
         end
 
-        # Device ID.
+        # Fetches the Device ID. Used for Push notifications.
         def device_id
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -67,7 +71,7 @@ module Masqueraide
           json_data
         end
 
-        # Snapchat updates.
+        # Fetches all Snapchat updates.
         def updates
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -81,7 +85,7 @@ module Masqueraide
           json_data
         end
 
-        # IP routing.
+        # IP routing stuff. Very boring.
         def ip_routing
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -95,12 +99,15 @@ module Masqueraide
           json_data
         end
         
-        # Conversation authentication with two people.
+        # Upload profile picture. This changes a Snapchat profile picture.
         def upload_profile_pic(path)
           creds_not_found if @username.nil? == true && @username.nil? == true
+          
+          # Allow only .jpg or .jpeg. Check for it's existence too.
           raise "InvalidFileFormatException" if (File.extname(path) != ".jpg") && (File.extname(path) != ".jpeg")
           raise Errno::ENOENT if File.exist?(path) == false
           data = Faraday::UploadIO.new(path, 'image/jpg')
+          
           params = {
             'username' => @username,
             'auth_token' => @auth_token,
@@ -115,7 +122,7 @@ module Masqueraide
           json_data
         end
 
-        # Snapchat stories.
+        # Fetches Snapchat stories.
         def stories
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -129,7 +136,7 @@ module Masqueraide
           json_data
         end
         
-        # TODO: Upload a snap to a user.
+        # TODO: Upload a snap to a user or users.
         def send_snap(recipients, time=5.0)
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -149,7 +156,7 @@ module Masqueraide
           json_data
         end
 
-        # An array of Snapchat conversations.
+        # Fetches an array of Snapchat conversations.
         def conversations
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -163,7 +170,7 @@ module Masqueraide
           json_data
         end
         
-        # Network Ping request
+        # Network Ping request. Again, boring.
         def network_ping_request
           headers = {
             "Host" => "app.snapchat.com",
@@ -177,7 +184,8 @@ module Masqueraide
           json_data
         end
 
-        # Conversation authentication with two people.
+        # Fetches a conversation authentication between two people.
+        # Note: You must be both friends for this method to work.
         def conversation_auth(to)
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -194,7 +202,7 @@ module Masqueraide
           json_data
         end
 
-        # A single Snapchat conversation.
+        # Fetches a single Snapchat conversation from username.
         def conversation(username)
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -211,7 +219,7 @@ module Masqueraide
           json_data
         end
 
-        # Chat Typing...
+        # Send "Chat Typing..." to a username or usernames.
         def chat_typing(*usernames)
           creds_not_found if @username.nil? == true && @username.nil? == true
           params = {
@@ -228,13 +236,13 @@ module Masqueraide
           json_data
         end
 
-        # TODO: Send a chat message.
+        # TODO: Send a chat message. Currently not implemented.
         def chat(_message, _username)
           return "Oh no! You're trying to call a function that is not implemented! Please use the official Snapchat app to chat instead. :P"
         end
 
         # If you've already got an auth token,
-        # auth token needs the username and auth_token.
+        # set_auth_token needs the username and valid auth_token.
         def set_auth_token(username, auth_token)
           @username = username
           @auth_token = auth_token
@@ -298,7 +306,7 @@ module Masqueraide
         end
 
         # Authenticate the generated JWT token with the Casper API.
-        # TODO: Better exceptions, return nil instead of rasiing exceptions.
+        # TODO: Better exceptions, return nil instead of raising exceptions.
         def casper_auth(url, params = {})
           fctx = Faraday.new(url: CASPER_ENDPOINT, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
@@ -317,7 +325,7 @@ module Masqueraide
             case res.status
             when 400
               if res.headers['content-type'] == 'application/json'
-                raise 'BadRequestException: ' + JSON.parse(res.body)['message']
+                raise 'BadRequestError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 400 Bad Request'
@@ -331,7 +339,7 @@ module Masqueraide
               end
             when 429
               if res.headers['content-type'] == 'application/json'
-                raise 'RateLimitReachedException: ' + JSON.parse(res.body)['message']
+                raise 'RateLimitReachedError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 429 Rate Limit Reached'
@@ -342,7 +350,7 @@ module Masqueraide
         end
 
         # Send POST data to a URL.
-        # TODO: Better exceptions, return nil instead of rasiing exceptions.
+        # TODO: Better exceptions, return nil instead of raising exceptions.
         def post(url, headers, params = {}, multipart=false)
           fctx = Faraday.new(url: SC_URL, ssl: { verify: @verify }) do |f|
             f.response :logger if @debug == true
@@ -354,7 +362,8 @@ module Masqueraide
             end
             f.adapter Faraday.default_adapter
           end
-          
+        
+          # Check for multipart uploads
         res = ""
         if multipart == true
             res = fctx.post do |req|
@@ -399,7 +408,7 @@ module Masqueraide
             case res.status
             when 400
               if res.headers['content-type'] == 'application/json'
-                raise 'BadRequestException: ' + JSON.parse(res.body)['message']
+                raise 'BadRequestError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 400 Bad Request'
@@ -420,7 +429,7 @@ module Masqueraide
               end
             when 429
               if res.headers['content-type'] == 'application/json'
-                raise 'RateLimitReachedException: ' + JSON.parse(res.body)['message']
+                raise 'RateLimitReachedError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 429 Rate Limit Reached'
@@ -461,7 +470,7 @@ module Masqueraide
             case res.status
             when 400
               if res.headers['content-type'] == 'application/json'
-                raise 'BadRequestException: ' + JSON.parse(res.body)['message']
+                raise 'BadRequestError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 400 Bad Request'
@@ -482,7 +491,7 @@ module Masqueraide
               end
             when 429
               if res.headers['content-type'] == 'application/json'
-                raise 'RateLimitReachedException: ' + JSON.parse(res.body)['message']
+                raise 'RateLimitReachedError: ' + JSON.parse(res.body)['message']
               else
                 puts res.body
                 raise 'Error: 429 Rate Limit Reached'

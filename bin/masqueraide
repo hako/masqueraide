@@ -2,4 +2,5 @@
 
 require 'masqueraide/cli'
 
+# Execute the `masqueraide` command.
 Masqueraide::CLI.start(ARGV)

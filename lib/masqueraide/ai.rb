@@ -10,6 +10,16 @@ module Masqueraide
   # AI class for a Masqueraide AI
   class AI
     attr_accessor :ai_name, :username, :room, :id
+    
+    # Initalise method for AI class
+    #
+    # ai_name  = Name of the AI.
+    # room     = Room is a supported room by Masqueraide.
+    # username = Username of the bot.
+    # engine   = Engine is the NLP engine supported by  Masqueraide
+    #            Default is :ebooks.
+    # &m       = An optional block.
+     
     def initialize(ai_name = nil, room = nil, username = nil, engine = nil, &m)
       @id = 'MAS' << '_' << mid.upcase
       ai_name ||= @id
@@ -28,7 +38,7 @@ module Masqueraide
       yield(self) unless m.nil?
     end
 
-    # Learns from a dataset, creates a model internally.
+    # Learns from a dataset, creates and uses a model internally.
     def learn_from_dataset(path)
       # If array use consume_all.
       if (File.exist? path) == false
@@ -47,7 +57,7 @@ module Masqueraide
       end
     end
 
-    # Loads an already created dataset.
+    # Loads an already created dataset from a path.
     def load_dataset(path)
       if (File.exist? path) == false
         raise 'FileNotFoundError: The path "' + path + '" does not exist'
@@ -76,9 +86,10 @@ module Masqueraide
       end
       @engine.make_response(reply, length)
     end
-
-    # Must be a social media room or part of a room class.
-    # Will refactor...
+    
+    # Assigns an AI to a social media room.
+    # Parameter r must be a symbol.
+    # See Masqueraide::ROOMS for available rooms.
     def assign_room(r)
       if r.class.to_s.byteslice(0, 17) == Masqueraide::Room.to_s
         @room = r
@@ -108,7 +119,7 @@ module Masqueraide
     def start(fancy = false, commentary = false)
       if fancy == true
 
-        puts ''"
+        puts "
         .ad88ba.
        .ad8888888a.
       d8``988P``988b
@@ -117,7 +128,7 @@ module Masqueraide
      d888   '88KHW8P
      `dP'     9888P
 
-   "'' + 'M A S Q U E R ''' + 'A I'.white + ''" D E\n" + phrases + "\n"
+   " + 'M A S Q U E R ' + 'A I'.white + " D E\n" + phrases + "\n"
         puts ''
         puts '----------------------------------------'
 
@@ -140,7 +151,7 @@ module Masqueraide
       if commentary == true
         if @room.name == 'Twitter'
           puts @ai_name + " (@#{username})".cyan.bold + ' enters the ' + @room.name.downcase + ' room...'
-      end
+        end
         sleep 2
         puts @ai_name + ' puts on a mask with id ' + @id + ' and gets ready...'
         sleep 1
@@ -170,7 +181,7 @@ module Masqueraide
       end
     end
     
-    # Random phrases.
+    # Random Masqueraide launch phrases.
     def phrases
       quote = ['  Let the dance begin.', '     Human or AI?', "     Let's dance."]
       quote[Random.rand(0...quote.length)]

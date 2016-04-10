@@ -17,20 +17,22 @@ module Masqueraide
         NAME
       end
       
+      # Enables or disables logging.
       def logging=(bool)
         @logging = bool
       end
       
-      # Enables or disables logging.
+      # Superclass Ebooks::Bot's log function. 
+      # (Only enabled or disabled by using logging=)
       def log(*args)
         if @logging == true
-          super *args
+          super(*args)
         end
       end
 
       # Fetch an AI by it's name in the room.
       def ai(name)
-        ai = @@ais_in_room.select { |ai| ai.username == name }
+        ai = @@ais_in_room.select { |a| a.username == name }
         ai[0]
       end
 
