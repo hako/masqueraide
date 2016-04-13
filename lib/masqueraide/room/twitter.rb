@@ -16,18 +16,14 @@ module Masqueraide
       def name
         NAME
       end
-      
+
       # Enables or disables logging.
-      def logging=(bool)
-        @logging = bool
-      end
-      
-      # Superclass Ebooks::Bot's log function. 
+      attr_writer :logging
+
+      # Superclass Ebooks::Bot's log function.
       # (Only enabled or disabled by using logging=)
       def log(*args)
-        if @logging == true
-          super(*args)
-        end
+        super(*args) if @logging == true
       end
 
       # Fetch an AI by it's name in the room.

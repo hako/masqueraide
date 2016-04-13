@@ -10,7 +10,7 @@ module Masqueraide
   # AI class for a Masqueraide AI
   class AI
     attr_accessor :ai_name, :username, :room, :id
-    
+
     # Initalise method for AI class
     #
     # ai_name  = Name of the AI.
@@ -19,7 +19,7 @@ module Masqueraide
     # engine   = Engine is the NLP engine supported by  Masqueraide
     #            Default is :ebooks.
     # &m       = An optional block.
-     
+
     def initialize(ai_name = nil, room = nil, username = nil, engine = nil, &m)
       @id = 'MAS' << '_' << mid.upcase
       ai_name ||= @id
@@ -47,14 +47,11 @@ module Masqueraide
       return @engine.consume_all path if (path.respond_to? 'each') == true
       @engine.consume path
     end
-    
+
     # Is our AI assigned a room?
     def assigned?
-      if @room.nil?
-        return false
-      else
-        return true
-      end
+      return true unless @room.nil?
+      false
     end
 
     # Loads an already created dataset from a path.
@@ -78,7 +75,7 @@ module Masqueraide
     def dataset
       @engine.dataset
     end
-    
+
     # Replies to the person.
     def reply(reply, length)
       if length.integer? == false
@@ -86,7 +83,7 @@ module Masqueraide
       end
       @engine.make_response(reply, length)
     end
-    
+
     # Assigns an AI to a social media room.
     # Parameter r must be a symbol.
     # See Masqueraide::ROOMS for available rooms.
@@ -106,9 +103,7 @@ module Masqueraide
         else
           @room = ROOMS[r.to_sym]
           # Only applies to a special case like twitter.
-          if @room == Masqueraide::Room::Twitter
-            @room = @room.new(@username)
-          end
+          @room = @room.new(@username) if @room == Masqueraide::Room::Twitter
           @room.ai = self
           return @room
         end
@@ -180,7 +175,7 @@ module Masqueraide
         return ENGINES[engine]
       end
     end
-    
+
     # Random Masqueraide launch phrases.
     def phrases
       quote = ['  Let the dance begin.', '     Human or AI?', "     Let's dance."]

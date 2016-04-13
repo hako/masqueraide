@@ -26,18 +26,18 @@ describe 'Masqueraide AI' do
   describe 'AI statements and responses' do
     it 'can generate a statement' do
       testbot = Masqueraide::AI.new('TestBot')
-      testbot.learn_from_dataset "spec/test_dataset/dataset_1.txt"
-      expect(testbot.say(140)).to eq "the quick brown fox jumps over the lazy dog"
+      testbot.learn_from_dataset 'spec/test_dataset/dataset_1.txt'
+      expect(testbot.say(140)).to eq 'the quick brown fox jumps over the lazy dog'
     end
     it 'can generate a response' do
       testbot = Masqueraide::AI.new('TestBot')
-      testbot.learn_from_dataset "spec/test_dataset/dataset_2.txt"
-      expect(testbot.reply("test response",140).length).not_to eq 0
+      testbot.learn_from_dataset 'spec/test_dataset/dataset_2.txt'
+      expect(testbot.reply('test response', 140).length).not_to eq 0
     end
     it 'can produce a response that is less than or equal to 140 characters' do
       testbot = Masqueraide::AI.new('TestBot')
-      testbot.learn_from_dataset "spec/test_dataset/dataset_2.txt"
-      expect(testbot.reply("test response",140).length).to be <= 140
+      testbot.learn_from_dataset 'spec/test_dataset/dataset_2.txt'
+      expect(testbot.reply('test response', 140).length).to be <= 140
     end
   end
 end

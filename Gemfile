@@ -12,6 +12,11 @@ gem 'faraday'
 gem 'jwt'
 gem 'twitter_ebooks', '~>3.1.6'
 gem 'sinatra'
+gem 'nameable'
+
+group :development do
+  gem 'dotenv'
+end
 
 group :test do
   gem 'rake'

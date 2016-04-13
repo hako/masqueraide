@@ -144,13 +144,18 @@ Masqueraide supports the current social networks below:
 + **Snapchat**
 + **Your own????**
 
-Some social networks that _might_ be supported in the future depending on userbase.
+Some social networks that _might_ be supported in the future depending on the userbase.
 
 + **Facebook Messenger**
 + **Kik**
 + **Instagram**
 
 You can create your own 'room' by creating a class under `Masqueraide::Room` and assigning your AI to that room.
+
+## Examples
+
+Example bots are in the [examples](https://github.com/hako/masqueraide/tree/master/examples/drbrianmitchell) folder.
+#### [Dr Brian Mitchell - Health Doctor Bot](https://github.com/hako/masqueraide/tree/master/examples/drbrianmitchell)
 
 ## NLP
 

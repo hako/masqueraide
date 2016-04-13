@@ -13,12 +13,12 @@ module Masqueraide
       # Supress Ebooks's puts statement. (Use only for debug)
       def puts(p)
       end
-      
+
       # Returns the current dataset.
       def dataset
         self
       end
-      
+
       # Loads an already created dataset from a path.
       # Calls the superclass Ebooks::Model to load it.
       def load(path)
