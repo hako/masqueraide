@@ -13,6 +13,7 @@ gem 'jwt'
 gem 'twitter_ebooks', '~>3.1.6'
 gem 'sinatra'
 gem 'nameable'
+gem 'classifier-reborn'
 
 group :development do
   gem 'dotenv'
