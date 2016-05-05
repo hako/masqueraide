@@ -13,7 +13,7 @@
 ```
 
 <h3 align="center">
-  <img src="https://github.com/hako/masqueraide/tree/master/assets/logo/logo.png">
+  <img src="https://cloud.githubusercontent.com/assets/2040416/15059964/7d95a376-131e-11e6-9d67-5878553a182c.png">
   <br><br>
 </h3>
 
