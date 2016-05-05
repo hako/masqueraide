@@ -3,6 +3,7 @@
 PATIENT_GREETINGS = {
   'type' => :greeting,
   'data' => [
+    'Hi',
     'Hi Doctor.',
     'Hey Doc',
     'Hi Doc',
@@ -14,8 +15,12 @@ PATIENT_GREETINGS = {
     'Hiya there',
     'Hi Dr!',
     'Greetings',
+    'Greetings!',
     'Hello',
-    'Hi',
+    'HI',
+    'Hiii',
+    'Hola',
+    'Well hello!',
     'Hi :D',
     'Hi!',
     'Hi.',
@@ -27,6 +32,9 @@ PATIENT_GREETINGS = {
     'Hi!!',
     'Yooyooyooyoyoy bboy',
     'YO!',
+    "How's it going.",
+    "How's it going",
+    "How's it going?",
     'Hello',
     'Hello Doc',
     'Hello Doctor!',
@@ -81,9 +89,23 @@ PATIENT_QUESTION = {
     'How long will I need treatment for?',
     'Are there any side effects or risks? If so, what are they?',
     'Are there other ways to treat my condition?',
+    'Which drug should I take?',
+    'which drug should I take',
+    'What is it?',
+    'How will I get better?',
+    'How is this helpful?',
+    'When am I going to get my diagnosis?',
+    'When am I going to get my diagnosis',
+    'When am I going to get',
+    'When',
+    'When am I going',
+    'How long will it take?',
+    'What do I do?',
     'Where can I go for more information?',
     'What do you recommend?',
     'What do you recommend Doctor',
+    'Is there a possibilty',
+    'Is there a possibilty I will develop this disease?',
     'Do you think?',
     'How can I be a better person?',
     'Advice?',
@@ -114,6 +136,7 @@ PATIENT_QUESTION = {
     'Is it something serious?',
     'Is this a common problem at my age?',
     'Is this a common problem?',
+    'What happens?',
     "What happens if I don't get better?"
   ]
 }.freeze
@@ -129,6 +152,7 @@ GREETINGS = {
     'Good afternoon *.',
     'Good evening!',
     'Good evening *.',
+    'How have you been?',
     'Hi *, :)',
     'Hello *! :)',
     'Hi there *. :)',
@@ -146,6 +170,9 @@ GREETINGS = {
     'Well hello!',
     'Yes?',
     'Morning!',
+    'Well hello!',
+    'Well hello there!',
+    'Well hello there, How are you today?',
     "I'm quite fine, thanks!",
     'Hello there!',
     'Hello there, whats the problem?',
@@ -439,5 +466,42 @@ DR_UNSURE = {
     "I don't think you're making sense.",
     'What are you trying to say?',
     "I'm not quite sure what you mean?"
+  ]
+}.freeze
+
+DR_DIAGNOSE = {
+  'type' => :diagnose,
+  'data' => [
+    'Could you be more specific on your condition?',
+    'Are there any more symptoms?',
+    'Do you know what else is causing this to happen?',
+    'Do you remember anything else that caused this?',
+    'What other issues do you experience?',
+    "Any more symptoms you're experiencing?",
+    'Do you experience any other symptoms or side effects?',
+    'If possible could you please describe your symptoms further.',
+    'Could you explain further?',
+    'Could you explain this further please?',
+    'Could you please clarify further on your illness?'
+  ]
+}.freeze
+
+DR_DIAGNOSE_RESULTS = {
+  'type' => :results,
+  'data' => [
+    'OK, It seems you have symptoms of @. from the looks of it.',
+    'It seems you have symptoms of @.',
+    'Since you have symptoms of @, I can only assume you have #. Does that help?',
+    'It seems you have symptoms of @. This can be treated with some %.',
+    'I have found out that you may have symptoms of @.',
+    'It seems likely you have signs of @, *.',
+    'I can only say that it is likely that you might have signs of @.',
+    'At this stage, it is likely you have @, Go to your GP for a better result.',
+    '*, it is likely you have @, I would go to your GP for a better result.',
+    'I have concluded that you have @, *. Just treat it with %. I hope this helps.',
+    'It appears that you have symptoms of @. * if it gets worse, contact your GP.',
+    'It appears that you have symptoms of @. * if it gets worse, you might be showing signs of ~.',
+    'It looks to me that you have @, *.',
+    "It seems likely you have @. I would contact your local GP if you\'re worried."
   ]
 }.freeze

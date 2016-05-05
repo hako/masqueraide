@@ -1,6 +1,7 @@
+#!/usr/bin/ruby
 # Dr Brian Mitchell's training routine.
 
-require './corpuses/training/data.rb'
+require './corpuses/training/conversation.rb'
 require 'classifier-reborn'
 
 nb = ClassifierReborn::Bayes.new(:greeting, :secondary_greeting, :answer, :question, :thanks, :unsure, :positive, :negative)

@@ -11,3 +11,4 @@
 *.csv
 .env
 rubocop.html
+.ruby-version

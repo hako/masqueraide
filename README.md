@@ -13,7 +13,7 @@
 ```
 
 <h3 align="center">
-  <code>M A S Q U E R <b>A I</b> D E</code>
+  <img src="https://github.com/hako/masqueraide/tree/master/assets/logo/logo.png">
   <br><br>
 </h3>
 
@@ -142,13 +142,18 @@ Masqueraide supports the current social networks below:
 
 + **Twitter** (By using twitter_ebooks)
 + **Snapchat**
-+ **Your own????**
 
-Some social networks that _might_ be supported in the future depending on the userbase.
+Some social networks that _might_ be supported in the future depending on the size of the userbase and popularity.
 
 + **Facebook Messenger**
-+ **Kik**
 + **Instagram**
++ **Telegram**
++ **Kik**
++ **Skype**
++ **GroupMe**
++ **Yik Yak**
++ **Your own????**
+
 
 You can create your own 'room' by creating a class under `Masqueraide::Room` and assigning your AI to that room.
 
@@ -163,7 +168,7 @@ NLP related helper functions are available under `Masqueraide::NLP`
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo using `git`, cd into the `masqueraide` directory and run `bundler`.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 

@@ -102,11 +102,10 @@ module Masqueraide
         def upload_profile_pic(path)
           creds_not_found if @username.nil? == true && @username.nil? == true
 
-          # Allow only .jpg or .jpeg. Check for it's existence too.
+          # Allow only .jpg or .jpeg. Check for its existence too.
           raise 'InvalidFileFormatException' if (File.extname(path) != '.jpg') && (File.extname(path) != '.jpeg')
           raise Errno::ENOENT if File.exist?(path) == false
           data = Faraday::UploadIO.new(path, 'image/jpg')
-
           params = {
             'username' => @username,
             'auth_token' => @auth_token,
